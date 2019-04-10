@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Spark LMS - Login</title>
+	
+	<th:block th:replace="fragments/styles :: common"></th:block>
+	
+</head>
+<body class="login">
+    <div>
+
+      <div class="login_wrapper">
+          <section class="login_content">
+            <form th:action="@{/login}" method="post" id="loginform">
+              <h1>Login Form</h1>
+              <div>
+                <input type="text" class="form-control" placeholder="Username" name="username" />
+              </div>
+              <div>
+                <input type="password" class="form-control" placeholder="Password" name="password" />
+              </div>
+              <div>
+                <a class="btn btn-default submit" href="javascript:void(0)" onclick="document.getElementById('loginform').submit();">Log in</a>
+              </div>
+
+              <div class="clearfix"></div>
+
+              <div class="separator">
+
+                <div class="clearfix"></div>
+                <br />
+
+                <div>
+                  <h1><i class="fa fa-paw"></i> Spark LMS</h1>
+                </div>
+              </div>
+            </form>
+          </section>
+        </div>
+      </div>
+      
+  </body>
+</html>

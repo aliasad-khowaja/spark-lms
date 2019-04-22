@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- Meta, title, CSS, favicons, etc. -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Spark LMS - Login</title>
+
+<th:block th:replace="fragments/styles :: common"></th:block>
+<th:block th:replace="fragments/styles :: datatable"></th:block>
+
+</head>
+<body class="nav-md">
+	<div class="container body">
+		<div class="main_container">
+
+			<th:block th:replace="fragments/sidemenu :: menu"></th:block>
+			<th:block th:replace="fragments/topmenu :: menu"></th:block>
+
+			<!-- page content -->
+			<div class="right_col" role="main">
+				<div class="col-md-12 col-sm-12 col-xs-12">
+					<div class="x_panel">
+						<div class="x_title">
+							<h2>List of Members</h2>
+							<div class="clearfix"></div>
+						</div>
+						<div class="x_content">
+							<table id="datatable-buttons"
+								class="table table-striped table-bordered">
+								<thead>
+									<tr>
+										<th>Full Name</th>
+										<th>Type</th>
+										<th>Gender</th>
+										<th>Age</th>
+										<th>Joining Date</th>
+										<th>Actions</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="m : ${members}">
+										<td
+											th:text="${m.firstName + ' ' + m.middleName + ' ' + m.lastName}"></td>
+										<td th:text="${m.type}"></td>
+										<td th:text="${m.gender}"></td>
+										<td
+											th:text="${#dates.year(#dates.createToday()) - #dates.year(m.dateOfBirth)}"></td>
+										<td th:text="${#dates.format(m.joiningDate, 'dd-MMM-yyyy')}"></td>
+										<td>
+											<a th:href="@{'/member/edit/' + ${m.id}}"><i class="fa fa-edit"></i></a>
+											<a href="#" data-toggle="modal" data-target=".remove-member-modal" class="remove-member-lnk"
+											th:data-member-id="${m.id}" th:data-member-name="${m.firstName + ' ' + m.middleName + ' ' + m.lastName}">
+												<i class="fa fa-remove"></i>
+										</a></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /page content -->
+
+			<div class="modal fade remove-member-modal" tabindex="-1"
+				role="dialog" aria-hidden="true">
+				<div class="modal-dialog modal-sm">
+					<div class="modal-content">
+
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">×</span>
+							</button>
+							<h4 class="modal-title">Remove Member</h4>
+						</div>
+						<div class="modal-body">
+							<p>Are you sure you want to remove <br/><strong><span id="member-name"></span></strong>?</p>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">Cancel</button>
+							<button type="button" class="btn btn-primary" id="remove-member-btn">Yes!</button>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+			<th:block th:replace="fragments/footer :: footer"></th:block>
+
+		</div>
+	</div>
+
+	<th:block th:replace="fragments/scripts :: common"></th:block>
+	<th:block th:replace="fragments/scripts :: datatable"></th:block>
+	<script>
+		$(document).ready(function() {
+			var memberId, memberName;
+			$('.remove-member-lnk').click(function() {
+				console.log("called");
+				memberId = $(this).attr('data-member-id');
+				memberName = $(this).attr('data-member-name');
+				console.log(memberName)
+				$('.remove-member-modal').find('#member-name').text( memberName );
+			});
+			$('#remove-member-btn').click(function() {
+				$('.remove-member-modal').modal('hide');
+				window.location = "/member/remove/" + memberId;
+			});
+		});
+	</script>
+</body>
+</html>

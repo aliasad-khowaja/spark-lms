@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- Meta, title, CSS, favicons, etc. -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Spark LMS - Login</title>
+
+<th:block th:replace="fragments/styles :: common"></th:block>
+
+</head>
+<body class="nav-md">
+	<div class="container body">
+		<div class="main_container">
+
+			<th:block th:replace="fragments/sidemenu :: menu"></th:block>
+			<th:block th:replace="fragments/topmenu :: menu"></th:block>
+
+			<!-- page content -->
+			<div class="right_col" role="main">
+				<div class="row">
+					<div class="col-md-12 col-sm-12 col-xs-12">
+						<div class="x_panel">
+							<div class="x_title">
+								<h2 th:if="${member.id==null}">Add New Member</h2>
+								<h2 th:if="${member.id!=null}">Edit Member Data</h2>
+								<div class="clearfix"></div>
+							</div>
+							<div class="x_content">
+							<div class="alert alert-success alert-dismissible fade in" role="alert" th:if="${successMsg}">
+                    			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+		                    	<span th:text="*{successMsg}"></span>
+		                  	</div>
+								<br />
+								<form id="member-form" th:action="@{/member/save}" method="post" th:object="${member}" class="form-horizontal form-label-left">
+								
+									<div class="form-group">
+				                    	<label class="control-label col-md-3 col-sm-3 col-xs-12">Member Type <span class="required">*</span></label>
+				                        <div class="col-md-2 col-sm-2 col-xs-12">
+				                        	<select th:field="*{type}" class="form-control">
+				                        		<option th:each="mt : ${memberTypes}" th:value="${mt}" th:text="${mt}"></option>
+				                        	</select>
+				                        </div>
+				                 	</div>
+								
+									<div class="form-group">
+                        				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">First Name <span class="required">*</span></label>
+                        				<div class="col-md-4 col-sm-4 col-xs-12">
+                          					<input type="text" th:field="*{firstName}" class="form-control col-md-7 col-xs-12">
+				                        </div>
+				                        <div class="col-md-3 col-sm-3 col-xs-12">
+				                        	<span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span>
+				                        </div>
+				                 	</div>
+				                 	
+				                 	<div class="form-group">
+                        				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Middle Name <span class="required">*</span></label>
+                        				<div class="col-md-4 col-sm-4 col-xs-12">
+                          					<input type="text" th:field="*{middleName}" class="form-control col-md-7 col-xs-12">
+				                        </div>
+				                        <div class="col-md-3 col-sm-3 col-xs-12">
+				                        	<span th:if="${#fields.hasErrors('middleName')}" th:errors="*{middleName}"></span>
+				                        </div>
+				                 	</div>
+				                 	
+				                 	<div class="form-group">
+                        				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Last Name <span class="required">*</span></label>
+                        				<div class="col-md-4 col-sm-4 col-xs-12">
+                          					<input type="text" th:field="*{lastName}" class="form-control col-md-7 col-xs-12">
+				                        </div>
+				                        <div class="col-md-3 col-sm-3 col-xs-12">
+				                        	<span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span>
+				                        </div>
+				                 	</div>
+				                 	
+				                 	<div class="form-group">
+				                    	<label class="control-label col-md-3 col-sm-3 col-xs-12">Gender <span class="required">*</span></label>
+				                        <div class="col-md-2 col-sm-2 col-xs-12">
+				                        	<select th:field="*{gender}" class="form-control">
+											    <option th:value="'Male'" th:text="Male"></option>
+											    <option th:value="'Female'" th:text="Female"></option>
+											</select>
+				                        </div>
+				                 	</div>
+				                 	
+				                 	<div class="form-group">
+				                    	<label class="control-label col-md-3 col-sm-3 col-xs-12">Date of Birth <span class="required">*</span></label>
+				                        <div class="col-md-2 col-sm-2 col-xs-12">
+				                        	
+				                        	<input type="text" class="form-control" data-inputmask="'mask': '99-Aaa-9999'" name="dateOfBirth" id="dateOfBirth"
+				                        	 th:value="${member.dateOfBirth}?${#dates.format(member.dateOfBirth, 'dd-MMM-yyyy')}:''" >
+				                        	<span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+				                        </div>
+				                        <div class="col-md-3 col-sm-3 col-xs-12">
+				                        	<span id="dobErr"></span>
+				                        	<span th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}"></span>
+				                        </div>
+				                 	</div>
+				                 	
+				                 	
+				                 	<input type="hidden" th:if="${id!=null}" th:field="*{id}" />
+				                 	<input type="hidden" name="joiningDate" id="joiningDate" th:value="${member.joiningDate}?${#dates.format(member.joiningDate, 'dd-MMM-yyyy')}:${#dates.format(#dates.createNow(), 'dd-MMM-yyyy')}" />
+				                 	
+				                 	<div class="ln_solid"></div>
+			                      	<div class="form-group">
+			                        	<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+									  		<button class="btn btn-primary" type="reset">Reset</button>
+			                          		<button type="button" class="btn btn-success" id="saveBtn">Save</button>
+			                        	</div>
+			                      	</div>
+				                 	
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /page content -->
+
+			<th:block th:replace="fragments/footer :: footer"></th:block>
+
+		</div>
+	</div>
+
+	<th:block th:replace="fragments/scripts :: common"></th:block>
+	<!-- jquery.inputmask -->
+    <script th:src="@{/vendors/jquery.inputmask/dist/min/jquery.inputmask.bundle.min.js}"></script>
+    <script>
+    	$( document ).ready(function() {
+    		$('#saveBtn').click(function() {
+    			console.log('clicked');
+    			if( isValidateBirthDate() ) {
+    				$('#member-form').submit();
+    			} else {
+    				$('#dobErr').text('Invalid Date Format');
+    			}
+    		});
+    		
+    		function isValidateBirthDate() {
+    			var dateStr = $('#dateOfBirth').val();
+    			var timestamp = Date.parse(dateStr)
+    			return !isNaN(timestamp)
+    		}
+    		
+    	});
+    </script>
+</body>
+</html>

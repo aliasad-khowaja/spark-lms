@@ -52,7 +52,7 @@
 										<td th:text="${#dates.format(m.joiningDate, 'dd-MMM-yyyy')}"></td>
 										<td>
 											<a th:href="@{'/member/edit/' + ${m.id}}"><i class="fa fa-edit"></i></a>
-											<a href="#" data-toggle="modal" data-target=".remove-member-modal" class="remove-member-lnk"
+											<a data-toggle="modal" data-target=".remove-member-modal" onclick="confirmMember(this);"
 											th:data-member-id="${m.id}" th:data-member-name="${m.firstName + ' ' + m.middleName + ' ' + m.lastName}">
 												<i class="fa fa-remove"></i>
 										</a></td>
@@ -83,7 +83,7 @@
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Cancel</button>
-							<button type="button" class="btn btn-primary" id="remove-member-btn">Yes!</button>
+							<button type="button" class="btn btn-primary" onclick="removeMember()">Yes!</button>
 						</div>
 
 					</div>
@@ -98,20 +98,16 @@
 	<th:block th:replace="fragments/scripts :: common"></th:block>
 	<th:block th:replace="fragments/scripts :: datatable"></th:block>
 	<script>
-		$(document).ready(function() {
-			var memberId, memberName;
-			$('.remove-member-lnk').click(function() {
-				console.log("called");
-				memberId = $(this).attr('data-member-id');
-				memberName = $(this).attr('data-member-name');
-				console.log(memberName)
-				$('.remove-member-modal').find('#member-name').text( memberName );
-			});
-			$('#remove-member-btn').click(function() {
-				$('.remove-member-modal').modal('hide');
-				window.location = "/member/remove/" + memberId;
-			});
-		});
+		var memberId, memberName;
+		function confirmMember(element) {
+			memberId = $(element).attr('data-member-id');
+			memberName = $(element).attr('data-member-name');
+			$('.remove-member-modal').find('#member-name').text( memberName );
+		}
+		function removeMember() {
+			$('.remove-member-modal').modal('hide');
+			window.location = "/member/remove/" + memberId;
+		}
 	</script>
 </body>
 </html>

@@ -128,10 +128,9 @@
 	<th:block th:replace="fragments/scripts :: common"></th:block>
 	<!-- jquery.inputmask -->
     <script th:src="@{/vendors/jquery.inputmask/dist/min/jquery.inputmask.bundle.min.js}"></script>
-    <script>
+    <script type="text/javascript">
     	$( document ).ready(function() {
-    		$('#saveBtn').click(function() {
-    			console.log('clicked');
+    		$('#saveBtn').on('click', function() {
     			if( isValidateBirthDate() ) {
     				$('#member-form').submit();
     			} else {

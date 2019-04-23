@@ -8,10 +8,13 @@ public class Constants {
 	public static final String ROLE_ADMIN = "Admin";
 	public static final String ROLE_LIBRARIAN = "Librarian";
 	
+	public static final String MEMBER_PARENT = "Parent";
+	public static final String MEMBER_STUDENT = "Student";
+	public static final String MEMBER_OTHER = "Other";
 	public static final List<String> MEMBER_TYPES = new ArrayList<String>() {{
-	    add("Parent");
-	    add("Student");
-	    add("Other");
+	    add(MEMBER_PARENT);
+	    add(MEMBER_STUDENT);
+	    add(MEMBER_OTHER);
 	}};
 	
 }

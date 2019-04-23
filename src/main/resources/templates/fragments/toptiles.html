@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+
+<th:block th:fragment="tiles">
+	<!-- top tiles start -->
+	<div class="row tile_count">
+		<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+			<span class="count_top "><i class="fa fa-user"></i> Total Members</span>
+			<div class="count green" th:text="${topTiles.totalMembers}"></div>
+		</div>
+		<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+			<span class="count_top "><i class="fa fa-user"></i> Total Parents</span>
+			<div class="count" th:text="${topTiles.totalParents}"></div>
+		</div>
+		<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+			<span class="count_top "><i class="fa fa-user"></i> Total Students</span>
+			<div class="count" th:text="${topTiles.totalStudents}"></div>
+		</div>
+		<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+			<span class="count_top"><i class="fa fa-sitemap"></i> Total Categories</span>
+			<div class="count green">0</div>
+		</div>
+		<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+			<span class="count_top "><i class="fa fa-book"></i> Total Books</span>
+			<div class="count">0</div>
+		</div>
+		<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+			<span class="count_top"><i class="fa fa-cart-arrow-down"></i> Total Books Issued</span>
+			<div class="count green">0</div>
+		</div>
+	</div>
+	<!-- top tiles end -->
+
+</th:block>
+
+</html>

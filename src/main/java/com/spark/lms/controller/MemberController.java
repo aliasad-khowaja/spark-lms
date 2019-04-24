@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spark.lms.common.Constants;
 import com.spark.lms.model.Member;
@@ -53,26 +54,24 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public String saveMember(@Valid Member member, BindingResult bindingResult, Model model) {
+	public String saveMember(@Valid Member member, BindingResult bindingResult, final RedirectAttributes redirectAttributes) {
 		if( bindingResult.hasErrors() ) {
 			return "/member/form";
 		}
 		
 		if( member.getId() == null ) {
 			memberService.addNew(member);
-			model.addAttribute("member", new Member());
-			model.addAttribute("successMsg", "'" + member.getFirstName()+" "+member.getMiddleName() + "' is added as a new member.");
+			redirectAttributes.addFlashAttribute("successMsg", "'" + member.getFirstName()+" "+member.getMiddleName() + "' is added as a new member.");
+			return "redirect:/member/add";
 		} else {
-			Member updateMember = memberService.save( member );
-			model.addAttribute("member", updateMember);
-			model.addAttribute("successMsg", "Changes for '" + member.getFirstName()+" "+member.getMiddleName() + "' are saved successfully. ");
+			Member updatedMember = memberService.save( member );
+			redirectAttributes.addFlashAttribute("successMsg", "Changes for '" + member.getFirstName()+" "+member.getMiddleName() + "' are saved successfully. ");
+			return "redirect:/member/edit/" + updatedMember.getId();
 		}
-		
-		return "/member/form";
 	}
 	
 	@RequestMapping(value = "/remove/{id}", method = RequestMethod.GET)
-	public String removeMember(@PathVariable(name = "id") Long id, Model model) {
+	public String removeMember(@PathVariable(name = "id") Long id) {
 		Member member = memberService.get( id );
 		if( member != null ) {
 			memberService.delete(id);

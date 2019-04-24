@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spark.lms.model.Category;
 import com.spark.lms.model.Member;
@@ -45,26 +46,24 @@ public class CategoryController {
 	}
 	
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public String saveCategory(@Valid Category category, BindingResult bindingResult, Model model) {
+	public String saveCategory(@Valid Category category, BindingResult bindingResult, final RedirectAttributes redirectAttributes) {
 		if( bindingResult.hasErrors() ) {
 			return "/category/form";
 		}
 		
 		if( category.getId() == null ) {
 			categoryService.addNew(category);
-			model.addAttribute("category", new Category());
-			model.addAttribute("successMsg", "'" + category.getName() + "' is added as a new category.");
+			redirectAttributes.addFlashAttribute("successMsg", "'" + category.getName() + "' is added as a new category.");
+			return "redirect:/category/add";
 		} else {
 			Category updateCategory = categoryService.save( category );
-			model.addAttribute("category", updateCategory);
-			model.addAttribute("successMsg", "Changes for '" + category.getName() + "' are saved successfully. ");
+			redirectAttributes.addFlashAttribute("successMsg", "Changes for '" + category.getName() + "' are saved successfully. ");
+			return "redirect:/category/edit/"+updateCategory.getId();
 		}
-		
-		return "/category/form";
 	}
 	
 	@RequestMapping(value = "/remove/{id}", method = RequestMethod.GET)
-	public String removeCategory(@PathVariable(name = "id") Long id, Model model) {
+	public String removeCategory(@PathVariable(name = "id") Long id) {
 		Category category = categoryService.get( id );
 		if( category != null ) {
 			categoryService.delete(id);

@@ -67,7 +67,7 @@
 				                 	</div>
 				                 	
 				                 	<div class="form-group">
-                        				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Last Name <span class="required">*</span></label>
+                        				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Last Name</label>
                         				<div class="col-md-4 col-sm-4 col-xs-12">
                           					<input type="text" th:field="*{lastName}" class="form-control col-md-7 col-xs-12">
 				                        </div>
@@ -107,7 +107,12 @@
 				                 	<div class="ln_solid"></div>
 			                      	<div class="form-group">
 			                        	<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-									  		<button class="btn btn-primary" type="reset">Reset</button>
+			                        		<th:block th:if="${id==null}">
+			                        			<button class="btn btn-primary" type="reset">Reset</button>
+			                        		</th:block>
+									  		<th:block th:if="${id!=null}">
+			                        			<button class="btn btn-primary" type="button" id="gotoListBtn" >Go to list page</button>
+			                        		</th:block>
 			                          		<button type="button" class="btn btn-success" id="saveBtn">Save</button>
 			                        	</div>
 			                      	</div>
@@ -128,23 +133,6 @@
 	<th:block th:replace="fragments/scripts :: common"></th:block>
 	<!-- jquery.inputmask -->
     <script th:src="@{/vendors/jquery.inputmask/dist/min/jquery.inputmask.bundle.min.js}"></script>
-    <script type="text/javascript">
-    	$( document ).ready(function() {
-    		$('#saveBtn').on('click', function() {
-    			if( isValidateBirthDate() ) {
-    				$('#member-form').submit();
-    			} else {
-    				$('#dobErr').text('Invalid Date Format');
-    			}
-    		});
-    		
-    		function isValidateBirthDate() {
-    			var dateStr = $('#dateOfBirth').val();
-    			var timestamp = Date.parse(dateStr)
-    			return !isNaN(timestamp)
-    		}
-    		
-    	});
-    </script>
+    <script th:src="@{/custom/js/member/form.js}"></script>
 </body>
 </html>

@@ -42,7 +42,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
-	public String addMemeberPage(@PathVariable(name = "id") Long id, Model model) {
+	public String editMemeberPage(@PathVariable(name = "id") Long id, Model model) {
 		Member member = memberService.get( id );
 		if( member != null ) {
 			model.addAttribute("member", member);

@@ -25,7 +25,7 @@
 				<div class="col-md-12 col-sm-12 col-xs-12">
 					<div class="x_panel">
 						<div class="x_title">
-							<h2>List of Members</h2>
+							<h2>List of Categories</h2>
 							<div class="clearfix"></div>
 						</div>
 						<div class="x_content">
@@ -33,27 +33,23 @@
 								class="table table-striped table-bordered">
 								<thead>
 									<tr>
-										<th>Full Name</th>
-										<th>Type</th>
-										<th>Gender</th>
-										<th>Age</th>
-										<th>Joining Date</th>
+										<th>Category</th>
+										<th>Short name</th>
+										<th>Notes</th>
+										<th>Created</th>
 										<th>Actions</th>
 									</tr>
 								</thead>
 								<tbody>
-									<tr th:each="m : ${members}">
-										<td
-											th:text="${m.firstName + ' ' + m.middleName + ' ' + m.lastName}"></td>
-										<td th:text="${m.type}"></td>
-										<td th:text="${m.gender}"></td>
-										<td
-											th:text="${#dates.year(#dates.createToday()) - #dates.year(m.dateOfBirth)}"></td>
-										<td th:text="${#dates.format(m.joiningDate, 'dd-MMM-yyyy')}"></td>
+									<tr th:each="c : ${categories}">
+										<td th:text="${c.name}"></td>
+										<td th:text="${c.shortName}"></td>
+										<td th:text="${c.notes}"></td>
+										<td th:text="${#dates.format(c.createDate, 'dd-MMM-yyyy')}"></td>
 										<td>
-											<a th:href="@{'/member/edit/' + ${m.id}}"><i class="fa fa-edit"></i></a>
-											<a data-toggle="modal" data-target=".remove-member-modal" class="remove-member-lnk"
-											th:data-member-id="${m.id}" th:data-member-name="${m.firstName + ' ' + m.middleName + ' ' + m.lastName}">
+											<a th:href="@{'/category/edit/' + ${c.id}}"><i class="fa fa-edit"></i></a>
+											<a data-toggle="modal" data-target=".remove-category-modal" class="remove-category-lnk"
+											th:data-category-id="${c.id}" th:data-category-name="${c.name}">
 												<i class="fa fa-remove"></i>
 										</a></td>
 									</tr>
@@ -65,7 +61,7 @@
 			</div>
 			<!-- /page content -->
 
-			<div class="modal fade remove-member-modal" tabindex="-1"
+			<div class="modal fade remove-category-modal" tabindex="-1"
 				role="dialog" aria-hidden="true">
 				<div class="modal-dialog modal-sm">
 					<div class="modal-content">
@@ -75,15 +71,15 @@
 								aria-label="Close">
 								<span aria-hidden="true">×</span>
 							</button>
-							<h4 class="modal-title">Remove Member</h4>
+							<h4 class="modal-title">Remove Category</h4>
 						</div>
 						<div class="modal-body">
-							<p>Are you sure you want to remove <br/><strong><span id="member-name"></span></strong>?</p>
+							<p>Are you sure you want to remove <br/><strong><span id="category-name"></span></strong>?</p>
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Cancel</button>
-							<button type="button" class="btn btn-primary" id="remove-member-btn">Yes!</button>
+							<button type="button" class="btn btn-primary" id="remove-category-btn">Yes!</button>
 						</div>
 
 					</div>
@@ -97,6 +93,6 @@
 
 	<th:block th:replace="fragments/scripts :: common"></th:block>
 	<th:block th:replace="fragments/scripts :: datatable"></th:block>
-	<script th:src="@{/custom/js/member/list.js}"></script>
+	<script th:src="@{/custom/js/category/list.js}"></script>
 </body>
 </html>

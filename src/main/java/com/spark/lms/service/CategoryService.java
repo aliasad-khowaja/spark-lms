@@ -19,6 +19,10 @@ public class CategoryService {
 		return categoryRepository.count();
 	}
 	
+	public List<Category> getAllBySort() {
+		return categoryRepository.findAllByOrderByNameAsc();
+	}
+	
 	public List<Category> getAll() {
 		return categoryRepository.findAll();
 	}

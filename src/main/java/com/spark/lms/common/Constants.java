@@ -17,4 +17,8 @@ public class Constants {
 	    add(MEMBER_OTHER);
 	}};
 	
+	public static final Integer BOOK_STATUS_AVAILABLE = 1;
+	public static final Integer BOOK_STATUS_ISSUED = 2;
+	
+	
 }

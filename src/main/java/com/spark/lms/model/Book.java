@@ -51,6 +51,7 @@ public class Book {
 	
 	@ManyToOne
 	@JoinColumn
+	@NotNull(message = "*Please select category")
 	private Category category;
 
 	public Long getId() {

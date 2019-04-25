@@ -7,5 +7,5 @@ import com.spark.lms.model.Book;
 
 @Repository
 public interface BookRepository extends JpaRepository<Book, Long> {
-
+	public Book findByTag(String tag);
 }

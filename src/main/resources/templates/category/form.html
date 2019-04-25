@@ -25,8 +25,8 @@
 					<div class="col-md-12 col-sm-12 col-xs-12">
 						<div class="x_panel">
 							<div class="x_title">
-								<h2 th:if="${category.id==null}">Add New Category</h2>
-								<h2 th:if="${category.id!=null}">Edit Category Data</h2>
+								<h3 th:if="${category.id==null}">Add New Category</h3>
+								<h3 th:if="${category.id!=null}">Edit Category Data</h3>
 								<div class="clearfix"></div>
 							</div>
 							<div class="x_content">
@@ -42,7 +42,7 @@
                         				<div class="col-md-4 col-sm-4 col-xs-12">
                           					<input type="text" th:field="*{name}" class="form-control col-md-7 col-xs-12">
 				                        </div>
-				                        <div class="col-md-3 col-sm-3 col-xs-12">
+				                        <div class="col-md-3 col-sm-3 col-xs-12 mt-5">
 				                        	<span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
 				                        </div>
 				                 	</div>
@@ -52,7 +52,7 @@
                         				<div class="col-md-4 col-sm-4 col-xs-12">
                           					<input type="text" th:field="*{shortName}" class="form-control col-md-7 col-xs-12" placeholder="e.g: ENG">
 				                        </div>
-				                        <div class="col-md-3 col-sm-3 col-xs-12">
+				                        <div class="col-md-3 col-sm-3 col-xs-12 mt-5">
 				                        	<span th:if="${#fields.hasErrors('shortName')}" th:errors="*{shortName}"></span>
 				                        </div>
 				                 	</div>
@@ -62,7 +62,7 @@
                         				<div class="col-md-4 col-sm-4 col-xs-12">
                         					<textarea class="form-control col-md-7 col-xs-12" rows="3" th:field="*{notes}"></textarea>
 				                        </div>
-				                        <div class="col-md-3 col-sm-3 col-xs-12">
+				                        <div class="col-md-3 col-sm-3 col-xs-12 mt-5">
 				                        	<span th:if="${#fields.hasErrors('notes')}" th:errors="*{notes}"></span>
 				                        </div>
 				                 	</div>

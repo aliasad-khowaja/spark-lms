@@ -28,6 +28,10 @@ public class BookService {
 		return bookRepository.findById(id).get();
 	}
 	
+	public Book getByTag(String tag) {
+		return bookRepository.findByTag(tag);
+	}
+	
 	public Book addNew(Book book) {
 		book.setCreateDate(new Date());
 		book.setStatus( Constants.BOOK_STATUS_AVAILABLE );

@@ -25,8 +25,8 @@
 					<div class="col-md-12 col-sm-12 col-xs-12">
 						<div class="x_panel">
 							<div class="x_title">
-								<h2 th:if="${book.id==null}">Add New Book</h2>
-								<h2 th:if="${book.id!=null}">Edit Book Data</h2>
+								<h3 th:if="${book.id==null}">Add New Book</h3>
+								<h3 th:if="${book.id!=null}">Edit Book Data</h3>
 								<div class="clearfix"></div>
 							</div>
 							<div class="x_content">
@@ -45,6 +45,9 @@
 				                        		<option th:each="c : ${categories}" th:value="${c.id}" th:text="${c.name}" th:short-name="${c.shortName}"></option>
 				                        	</select>
 				                        </div>
+				                        <div class="col-md-3 col-sm-3 col-xs-12 mt-5">
+				                        	<span th:if="${#fields.hasErrors('category')}" th:errors="*{category}"></span>
+				                        </div>
 				                 	</div>
 								
 									<div class="form-group">
@@ -52,26 +55,53 @@
                         				<div class="col-md-4 col-sm-4 col-xs-12">
                           					<input type="text" th:field="*{tag}" class="form-control col-md-7 col-xs-12">
 				                        </div>
-				                        <div class="col-md-3 col-sm-3 col-xs-12">
+				                        <div class="col-md-3 col-sm-3 col-xs-12 mt-5">
 				                        	<span th:if="${#fields.hasErrors('tag')}" th:errors="*{tag}"></span>
 				                        </div>
 				                 	</div>
 								
 									<div class="form-group">
                         				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Book Title <span class="required">*</span></label>
-                        				<div class="col-md-4 col-sm-4 col-xs-12">
+                        				<div class="col-md-6 col-sm-6 col-xs-12">
                           					<input type="text" th:field="*{title}" class="form-control col-md-7 col-xs-12">
 				                        </div>
-				                        <div class="col-md-3 col-sm-3 col-xs-12">
+				                        <div class="col-md-3 col-sm-3 col-xs-12 mt-5">
 				                        	<span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
 				                        </div>
 				                 	</div>
 				                 	
+				                 	<div class="form-group">
+                        				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Authors <span class="required">*</span></label>
+                        				<div class="col-md-4 col-sm-4 col-xs-12">
+                          					<input type="text" th:field="*{authors}" class="form-control col-md-7 col-xs-12">
+				                        </div>
+				                        <div class="col-md-3 col-sm-3 col-xs-12 mt-5">
+				                        	<span th:if="${#fields.hasErrors('authors')}" th:errors="*{authors}"></span>
+				                        </div>
+				                 	</div>
 				                 	
+				                 	<div class="form-group">
+                        				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Publisher </label>
+                        				<div class="col-md-4 col-sm-4 col-xs-12">
+                          					<input type="text" th:field="*{publisher}" class="form-control col-md-7 col-xs-12">
+				                        </div>
+				                        <div class="col-md-3 col-sm-3 col-xs-12 mt-5">
+				                        	<span th:if="${#fields.hasErrors('publisher')}" th:errors="*{publisher}"></span>
+				                        </div>
+				                 	</div>
 				                 	
-				                 	
+				                 	<div class="form-group">
+                        				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">ISBN </label>
+                        				<div class="col-md-4 col-sm-4 col-xs-12">
+                          					<input type="text" th:field="*{isbn}" class="form-control col-md-7 col-xs-12">
+				                        </div>
+				                        <div class="col-md-3 col-sm-3 col-xs-12 mt-5">
+				                        	<span th:if="${#fields.hasErrors('isbn')}" th:errors="*{isbn}"></span>
+				                        </div>
+				                 	</div>
 				                 	
 				                 	<input type="hidden" th:if="${id!=null}" th:field="*{id}" />
+				                 	<input type="hidden" th:field="*{status}" />
 				                 	<input type="hidden" name="createDate" id="createDate" th:value="${book.createDate}?${#dates.format(book.createDate, 'dd-MMM-yyyy')}:${#dates.format(#dates.createNow(), 'dd-MMM-yyyy')}" />
 				                 	
 				                 	<div class="ln_solid"></div>

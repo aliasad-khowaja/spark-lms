@@ -64,11 +64,16 @@ public class BookController {
 		}
 		
 		if( book.getId() == null ) {
-			bookService.addNew(book);
-			redirectAttributes.addFlashAttribute("successMsg", "'" + book.getTitle() + "' is added as a new Book.");
-			return "redirect:/book/add";
+			if( bookService.getByTag(book.getTag()) != null ) {
+				bindingResult.rejectValue("tag", "tag", "Tag already exists");
+				return "/book/form";
+			} else {
+				bookService.addNew(book);
+				redirectAttributes.addFlashAttribute("successMsg", "'" + book.getTitle() + "' is added as a new Book.");
+				return "redirect:/book/add";
+			}
 		} else {
-			Book updatedBook = bookService.get(book.getId());
+			Book updatedBook = bookService.save(book);
 			redirectAttributes.addFlashAttribute("successMsg", "Changes for '" + book.getTitle() + "' are saved successfully. ");
 			return "redirect:/book/edit/"+updatedBook.getId();
 		}

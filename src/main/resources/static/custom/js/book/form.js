@@ -16,7 +16,9 @@ $(document).ready(function() {
 	
 	function updateTagField() {
 		var shortName =  $("#category-selectbox option:selected").attr("short-name");
-		$('#tag').val( shortName + '-' );
+		if( shortName ) {
+			$('#tag').val( shortName + '-' );
+		}
 	}
 	
 	if( !$('#id').val() ) {

@@ -2,13 +2,16 @@ package com.spark.lms.model;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -50,10 +53,13 @@ public class Book {
 	private Date createDate;
 	
 	@ManyToOne
-	@JoinColumn
+	@JoinColumn(name = "category_id")
 	@NotNull(message = "*Please select category")
 	private Category category;
 
+	@OneToOne(mappedBy = "book", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
+	private IssuedBook issuedBook;
+	
 	public Long getId() {
 		return id;
 	}
@@ -124,6 +130,14 @@ public class Book {
 
 	public void setCategory(Category category) {
 		this.category = category;
+	}
+
+	public IssuedBook getIssuedBook() {
+		return issuedBook;
+	}
+
+	public void setIssuedBook(IssuedBook issuedBook) {
+		this.issuedBook = issuedBook;
 	}
 	
 	

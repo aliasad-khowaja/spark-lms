@@ -2,11 +2,14 @@ package com.spark.lms.model;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -50,6 +53,9 @@ public class Member {
 	@Column(name = "joining_date")
 	private Date joiningDate;
 
+	@OneToOne(mappedBy = "member", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
+	private Issue issue;
+	
 	public Member(@NotNull String type, @NotNull String firstName, @NotNull String middleName, @NotNull String lastName,
 			@NotNull String gender, @NotNull Date dateOfBirth, @NotNull Date joiningDate) {
 		super();
@@ -126,6 +132,14 @@ public class Member {
 
 	public void setJoiningDate(Date joiningDate) {
 		this.joiningDate = joiningDate;
+	}
+
+	public Issue getIssue() {
+		return issue;
+	}
+
+	public void setIssue(Issue issue) {
+		this.issue = issue;
 	}
 	
 	

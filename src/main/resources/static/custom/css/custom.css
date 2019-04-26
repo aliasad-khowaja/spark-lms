@@ -4253,30 +4253,3 @@ table thead .checkbox.radio { margin-top:-7px;margin-top:-21px; }
     background-color: #ffff !important;
 }
 /** /bootstrap-datetimepicker **/
-
-
-.ml-5 {
-	margin-left: 5px;
-}
-.ml-10 {
-	margin-left: 10px;
-}
-.ml-15 {
-	margin-left: 15px;
-}
-.ml-20 {
-	margin-left: 20px;
-}
-
-.mt-5 {
-	margin-top: 5px;
-}
-.mt-10 {
-	margin-top: 10px;
-}
-.mt-15 {
-	margin-top: 15px;
-}
-.mt-20 {
-	margin-top: 20px;
-}

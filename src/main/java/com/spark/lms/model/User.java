@@ -1,5 +1,6 @@
 package com.spark.lms.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -14,7 +15,12 @@ import lombok.Data;
 
 @Entity
 @Table(name = "user")
-public class User {
+public class User implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	public User() {}
 	

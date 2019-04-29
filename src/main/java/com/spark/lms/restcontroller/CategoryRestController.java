@@ -7,19 +7,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.spark.lms.model.Member;
-import com.spark.lms.service.MemberService;
+import com.spark.lms.model.Category;
+import com.spark.lms.service.CategoryService;
 
 @RestController
-@RequestMapping(value = "/rest/member")
-public class MemberRestController {
-
+@RequestMapping(value = "/rest/category")
+public class CategoryRestController {
+	
 	@Autowired
-	private MemberService memberService;
+	private CategoryService categoryService;
 	
 	@GetMapping(value = {"/", "/list"})
-	public List<Member> all() {
-		return memberService.getAll();
+	public List<Category> all() {
+		return categoryService.getAll();
 	}
-	
+
 }

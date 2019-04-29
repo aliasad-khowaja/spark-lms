@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.spark.lms.common.Constants;
 import com.spark.lms.model.Book;
+import com.spark.lms.model.Category;
 import com.spark.lms.repository.BookRepository;
 
 @Service
@@ -30,6 +31,10 @@ public class BookService {
 	
 	public Book getByTag(String tag) {
 		return bookRepository.findByTag(tag);
+	}
+	
+	public List<Book> getByCategory(Category category) {
+		return bookRepository.findByCategory(category);
 	}
 	
 	public Book addNew(Book book) {

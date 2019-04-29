@@ -1,5 +1,6 @@
 package com.spark.lms.model;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -16,9 +17,16 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "issue")
-public class Issue {
+public class Issue implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -42,6 +50,7 @@ public class Issue {
 	@JoinColumn(name = "member_id")
 	private Member member;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "issue", cascade = CascadeType.ALL)
 	private List<IssuedBook> issuedBooks;
 	

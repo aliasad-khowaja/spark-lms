@@ -67,7 +67,7 @@ public class Book implements Serializable {
 	private Category category;
 
 	@JsonIgnore
-	@OneToOne(mappedBy = "book", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
 	private IssuedBook issuedBook;
 	
 	public Long getId() {

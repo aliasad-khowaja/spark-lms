@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.spark.lms.common.Constants;
 import com.spark.lms.model.IssuedBook;
 import com.spark.lms.repository.IssuedBookRepository;
 
@@ -25,4 +26,10 @@ public class IssuedBookService {
 	public IssuedBook save(IssuedBook issuedBook) {
 		return issuedBookRepository.save(issuedBook);
 	}
+	
+	public IssuedBook addNew(IssuedBook issuedBook) {
+		issuedBook.setReturned( Constants.BOOK_NOT_RETURNED );
+		return issuedBookRepository.save(issuedBook);
+	}
+
 }

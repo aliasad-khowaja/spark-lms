@@ -46,6 +46,7 @@ public class Issue implements Serializable {
 	@Column(name = "returned")
 	private Integer returned;
 	
+	@JsonIgnore
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "member_id")
 	private Member member;

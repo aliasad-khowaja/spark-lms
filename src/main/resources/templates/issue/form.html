@@ -36,7 +36,7 @@
 								
 								<div class="row">
                         			<div class="col-xs-12" >
-	                          			<h3><span class="pull-right"><b>Date:</b> <span th:text="${#dates.format(#dates.createNow(), 'dd-MMM-yyyy')}"></span></span></h3>
+	                          			<h3><span class="pull-right"><b>Issue Date:</b> <span th:text="${#dates.format(issueDate!=null?issueDate:#dates.createNow() , 'dd-MMM-yyyy')}"></span></span></h3>
                         			</div>
                     			</div>
 								<br />
@@ -74,6 +74,9 @@
 						                        		<option th:each="c : ${categories}" th:value="${c.id}" th:text="${c.name}"></option>
 						                        	</select>
 						                        </div>
+						                        <div class="col-md-3 col-sm-3 col-xs-3" >
+						                        	<button type="button" style="float:right;" id="addBookBtn" class="btn">Add Book</button>
+						                        </div>
 						                        
 					                 		</div>
 										
@@ -88,6 +91,27 @@
 										
 										</div>
 									</div>
+									<div class="row">
+										<div class="col-sm-12 mt-10" style="border: 1px solid #E6E9ED; min-height: 200px;">
+											<table id="issueBooksTable" class="table table-striped">
+												<thead>
+													<tr>
+														<th style="width: 50px;">#</th>
+														<th style="width: 120px;">Tag</th>
+														<th>Title</th>
+														<th>Author</th>
+														<th style="width: 50px;">Action</th>
+													</tr>
+												</thead>
+												<tbody></tbody>
+											</table>
+										</div>
+									</div>
+									<div class="row mt-10">
+										<div class="col-sm-12" >
+											<button type="button" style="float:right; width: 150px;" id="saveBtn" class="btn btn-success">Issue Book(s)</button>
+										</div>
+									</div>
 								</form>
 								
 									
@@ -100,6 +124,27 @@
 				</div>
 			</div>
 			<!-- /page content -->
+
+			<div class="modal fade errors-modal" tabindex="-1" role="dialog" aria-hidden="true">
+				<div class="modal-dialog modal-sm">
+					<div class="modal-content">
+
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">×</span>
+							</button>
+							<h4 class="modal-title">Error(s)</h4>
+						</div>
+						<div class="modal-body">
+							
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
+						</div>
+
+					</div>
+				</div>
+			</div>
 
 			<th:block th:replace="fragments/footer :: footer"></th:block>
 

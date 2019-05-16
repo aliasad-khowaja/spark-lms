@@ -21,6 +21,10 @@ public class BookService {
 		return bookRepository.count();
 	}
 	
+	public Long getTotalIssuedBooks() {
+		return bookRepository.countByStatus(Constants.BOOK_STATUS_ISSUED);
+	}
+	
 	public List<Book> getAll() {
 		return bookRepository.findAll();
 	}
@@ -33,8 +37,16 @@ public class BookService {
 		return bookRepository.findByTag(tag);
 	}
 	
+	public List<Book> get(List<Long> ids) {
+		return bookRepository.findAllById(ids);
+	}
+	
 	public List<Book> getByCategory(Category category) {
 		return bookRepository.findByCategory(category);
+	}
+	
+	public List<Book> geAvailabletByCategory(Category category) {
+		return bookRepository.findByCategoryAndStatus(category, Constants.BOOK_STATUS_AVAILABLE);
 	}
 	
 	public Book addNew(Book book) {

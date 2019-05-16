@@ -12,4 +12,6 @@ import com.spark.lms.model.Category;
 public interface BookRepository extends JpaRepository<Book, Long> {
 	public Book findByTag(String tag);
 	public List<Book> findByCategory(Category category);
+	public List<Book> findByCategoryAndStatus(Category category, Integer status);
+	public Long countByStatus(Integer status);
 }

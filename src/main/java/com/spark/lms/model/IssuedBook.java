@@ -31,7 +31,7 @@ public class IssuedBook implements Serializable {
 	private Long id;
 	
 	@JsonIgnore
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "book_id")
 	@NotNull
 	private Book book;

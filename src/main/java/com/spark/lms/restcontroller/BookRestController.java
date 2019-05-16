@@ -34,4 +34,10 @@ public class BookRestController {
 		return bookService.getByCategory( category );
 	}
 	
+	@GetMapping(value = "/{id}/available")
+	public List<Book> getAvailableBooks(@PathVariable(name = "id") Long id) {
+		Category category = categoryService.get(id);
+		return bookService.geAvailabletByCategory( category );
+	}
+	
 }

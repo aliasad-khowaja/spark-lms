@@ -6,13 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.spark.lms.common.Constants;
 import com.spark.lms.model.Category;
-import com.spark.lms.model.Issue;
 import com.spark.lms.service.CategoryService;
 import com.spark.lms.service.IssueService;
 

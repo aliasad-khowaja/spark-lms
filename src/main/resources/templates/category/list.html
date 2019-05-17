@@ -47,7 +47,7 @@
 										<td>
 											<a th:href="@{'/category/edit/' + ${c.id}}"><i class="fa fa-edit"></i></a>
 											<a data-toggle="modal" data-target=".remove-category-modal" onclick="removeCategoryDialog(this);"
-											th:data-category-id="${c.id}" th:data-category-name="${c.name}">
+											th:data-category-id="${c.id}" th:data-category-name="${c.name}" style="cursor: pointer;">
 												<i class="fa fa-remove"></i>
 										</a></td>
 									</tr>

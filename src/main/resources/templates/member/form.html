@@ -92,11 +92,25 @@
 				                        	
 				                        	<input type="text" class="form-control" data-inputmask="'mask': '99-Aaa-9999'" name="dateOfBirth" id="dateOfBirth"
 				                        	 th:value="${member.dateOfBirth}?${#dates.format(member.dateOfBirth, 'dd-MMM-yyyy')}:''" >
-				                        	<span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+				                        	<span class="fa fa-calendar form-control-feedback right" aria-hidden="true"></span>
 				                        </div>
 				                        <div class="col-md-3 col-sm-3 col-xs-12 mt-5">
 				                        	<span id="dobErr"></span>
 				                        	<span th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}"></span>
+				                        </div>
+				                 	</div>
+				                 	
+				                 	<div class="form-group">
+                        				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="contact">Contact # </label>
+                        				<div class="col-md-4 col-sm-4 col-xs-12">
+                          					<input type="text" th:field="*{contact}" class="form-control col-md-7 col-xs-12">
+				                        </div>
+				                 	</div>
+				                 	
+				                 	<div class="form-group">
+                        				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="contact">Email </label>
+                        				<div class="col-md-4 col-sm-4 col-xs-12">
+                          					<input type="text" th:field="*{email}" class="form-control col-md-7 col-xs-12">
 				                        </div>
 				                 	</div>
 				                 	

@@ -10,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
@@ -60,10 +61,12 @@ public class Member implements Serializable {
 	
 	@Column(name = "joining_date")
 	private Date joiningDate;
-
-	@JsonIgnore
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
-	private Issue issue;
+	
+	@Column(name = "contact")
+	private String contact;
+	
+	@Column(name = "email")
+	private String email;
 	
 	public Member(@NotNull String type, @NotNull String firstName, @NotNull String middleName, @NotNull String lastName,
 			@NotNull String gender, @NotNull Date dateOfBirth, @NotNull Date joiningDate) {
@@ -143,13 +146,22 @@ public class Member implements Serializable {
 		this.joiningDate = joiningDate;
 	}
 
-	public Issue getIssue() {
-		return issue;
+	public String getContact() {
+		return contact;
 	}
 
-	public void setIssue(Issue issue) {
-		this.issue = issue;
+	public void setContact(String contact) {
+		this.contact = contact;
 	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
 	
 	
 }

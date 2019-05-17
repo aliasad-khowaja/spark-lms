@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spark.lms.model.Category;
-import com.spark.lms.model.Member;
 import com.spark.lms.service.CategoryService;
 
 @Controller

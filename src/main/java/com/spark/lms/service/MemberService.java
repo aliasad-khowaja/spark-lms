@@ -16,6 +16,9 @@ public class MemberService {
 	@Autowired
 	private MemberRepository memberRepository;
 	
+	@Autowired
+	private IssueService issueService;
+	
 	public Long getTotalCount() {
 		return memberRepository.count();
 	}
@@ -51,6 +54,10 @@ public class MemberService {
 	
 	public void delete(Long id) {
 		memberRepository.deleteById(id);
+	}
+	
+	public boolean hasUsage(Member member) {
+		return issueService.getCountByMember(member) > 0;
 	}
 	
 }

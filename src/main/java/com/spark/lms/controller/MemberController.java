@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spark.lms.common.Constants;
@@ -71,12 +72,20 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "/remove/{id}", method = RequestMethod.GET)
-	public String removeMember(@PathVariable(name = "id") Long id) {
+	public String removeMember(@PathVariable(name = "id") Long id, Model model) {
 		Member member = memberService.get( id );
 		if( member != null ) {
-			memberService.delete(id);
+			if( memberService.hasUsage(member) ) {
+				model.addAttribute("memberInUse", true);
+				return showMembersPage(model);
+			} else {
+				memberService.delete(id);
+			}
 		}
 		return "redirect:/member/list";
 	}
+	
+	
+	
 	
 }

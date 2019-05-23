@@ -80,10 +80,15 @@ public class BookController {
 	}
 	
 	@RequestMapping(value = "/remove/{id}", method = RequestMethod.GET)
-	public String removeBook(@PathVariable(name = "id") Long id) {
+	public String removeBook(@PathVariable(name = "id") Long id, Model model) {
 		Book book = bookService.get( id );
 		if( book != null ) {
-			bookService.delete(id);
+			if( bookService.hasUsage(book) ) {
+				model.addAttribute("bookInUse", true);
+				return showBooksPage(model);
+			} else {
+				bookService.delete(id);
+			}
 		}
 		return "redirect:/book/list";
 	}

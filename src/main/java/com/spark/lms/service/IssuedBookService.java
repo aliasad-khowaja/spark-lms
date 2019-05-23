@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spark.lms.common.Constants;
+import com.spark.lms.model.Book;
 import com.spark.lms.model.IssuedBook;
 import com.spark.lms.repository.IssuedBookRepository;
 
@@ -21,6 +22,10 @@ public class IssuedBookService {
 	
 	public IssuedBook get(Long id) {
 		return issuedBookRepository.findById(id).get();
+	}
+	
+	public Long getCountByBook(Book book) {
+		return issuedBookRepository.countByBookAndReturned(book, Constants.BOOK_NOT_RETURNED);
 	}
 	
 	public IssuedBook save(IssuedBook issuedBook) {

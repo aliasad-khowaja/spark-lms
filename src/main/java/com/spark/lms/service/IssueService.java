@@ -40,6 +40,6 @@ public class IssueService {
 	}
 	
 	public Long getCountByMember(Member member) {
-		return issueRepository.countByMember(member);
+		return issueRepository.countByMemberAndReturned(member, Constants.BOOK_NOT_RETURNED);
 	}
 }

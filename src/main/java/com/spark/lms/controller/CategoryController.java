@@ -62,10 +62,15 @@ public class CategoryController {
 	}
 	
 	@RequestMapping(value = "/remove/{id}", method = RequestMethod.GET)
-	public String removeCategory(@PathVariable(name = "id") Long id) {
+	public String removeCategory(@PathVariable(name = "id") Long id, Model model) {
 		Category category = categoryService.get( id );
 		if( category != null ) {
-			categoryService.delete(id);
+			if( categoryService.hasUsage(category) ) {
+				model.addAttribute("categoryInUse", true);
+				return showCategoriesPage(model);
+			} else {
+				categoryService.delete(id);
+			}
 		}
 		return "redirect:/category/list";
 	}

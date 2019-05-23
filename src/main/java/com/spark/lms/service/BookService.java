@@ -17,6 +17,9 @@ public class BookService {
 	@Autowired
 	private BookRepository bookRepository;
 	
+	@Autowired
+	private IssuedBookService issuedBookService;
+	
 	public Long getTotalCount() {
 		return bookRepository.count();
 	}
@@ -67,4 +70,7 @@ public class BookService {
 		bookRepository.deleteById(id);
 	}
 	
+	public boolean hasUsage(Book book) {
+		return issuedBookService.getCountByBook(book)>0;
+	}
 }

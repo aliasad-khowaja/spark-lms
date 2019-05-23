@@ -47,4 +47,8 @@ public class CategoryService {
 	public void delete(Long id) {
 		categoryRepository.deleteById(id);
 	}
+	
+	public boolean hasUsage(Category category) {
+		return category.getBooks().size()>0;
+	}
 }
